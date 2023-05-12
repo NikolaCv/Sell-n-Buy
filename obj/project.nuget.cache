@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "AeTUHmVTAw+CECXK1YN9NlRcEhaCoZlrkVQuOvEI3FClUlM/y20cjBFAjHb47o/+rv9rF3n04+97jHvgPIEnEA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nikol\\Documents\\C#\\SellnBuy\\build.proj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nikol\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\nikol\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net45\\1.0.3\\microsoft.netframework.referenceassemblies.net45.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
