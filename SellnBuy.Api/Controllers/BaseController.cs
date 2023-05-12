@@ -8,7 +8,7 @@ namespace SellnBuy.Api.Controllers
 {	
 	[ApiController]
 	[Route("[controller]")]
-	public abstract class Controller<T, TDto, CreateTDto, UpdateTDto> : ControllerBase
+	public abstract class BaseController<T, TDto, CreateTDto, UpdateTDto> : ControllerBase
 	where T : BaseEntity
 	where TDto : class
 	where CreateTDto : class
@@ -16,7 +16,7 @@ namespace SellnBuy.Api.Controllers
 	{
 		protected readonly IService<T, TDto, CreateTDto, UpdateTDto> service;
 
-		public Controller(IService<T, TDto, CreateTDto, UpdateTDto> service)
+		public BaseController(IService<T, TDto, CreateTDto, UpdateTDto> service)
 		{
 			this.service = service;
 		}

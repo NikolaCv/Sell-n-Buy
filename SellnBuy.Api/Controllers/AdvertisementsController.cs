@@ -7,7 +7,7 @@ namespace SellnBuy.Api.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
-	public class AdvertisementsController : Controller<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>
+	public class AdvertisementsController : BaseController<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>
 	{
 		public AdvertisementsController(IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto> service) : base(service)
 		{
