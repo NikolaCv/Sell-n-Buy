@@ -12,7 +12,7 @@ namespace SellnBuy.Api.Services
 	where CreateTDto : class
 	where UpdateTDto : class
 	{
-		Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm);
+		Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
 		Task<TDto> GetAsync(Guid id);
 		Task<T> CreateAsync(CreateTDto item);
 		Task DeleteAsync(Guid id);

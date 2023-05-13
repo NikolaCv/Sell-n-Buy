@@ -14,7 +14,7 @@ namespace SellnBuy.Api.Services
 		{
 		}
 		
-        public override async Task<IEnumerable<AdvertisementDto>> GetAllAsync(string? title)
+        public override async Task<IEnumerable<AdvertisementDto>> GetAllAsync(string? title = null)
         {
             var advertisements = (await repository.GetAllAsync())
 						.Select(advertisement => advertisement.AsDto<Advertisement, AdvertisementDto>());
