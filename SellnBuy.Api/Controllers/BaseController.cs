@@ -23,7 +23,7 @@ namespace SellnBuy.Api.Controllers
 		
 		// GET /T
 		[HttpGet]
-		public async Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm)
+		public async Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null)
 		{
 			return await service.GetAllAsync(searchTerm);
 		}
