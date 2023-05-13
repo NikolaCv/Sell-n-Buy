@@ -9,30 +9,74 @@ namespace SellnBuy.Api
 		where TDto : class
 		where T : BaseEntity
 		{
-			return item switch
+			switch (item)
 			{
-				User user => new UserDto
-				(
-					user.Id,
-					user.Name,
-					user.Bio,
-					user.PhoneNumber,
-					user.Email,
-					user.CreatedDate
-				) as TDto,
-				Advertisement advertisement => new AdvertisementDto
-				(
-					advertisement.Id,
-					advertisement.Title,
-					advertisement.Description,
-					advertisement.Condition,
-					advertisement.Price,
-					advertisement.CreatedDate,
-					advertisement.userId,
-					advertisement.categoryId
-				) as TDto,
-				_ => null
-				
+				case User user when typeof(TDto) == typeof(UserDto):
+					return new UserDto
+					(
+						user.Id,
+						user.Name,
+						user.Bio,
+						user.PhoneNumber,
+						user.Email,
+						user.CreatedDate
+					) as TDto;
+					
+				case User user when typeof(TDto) == typeof(CreateUserDto):
+					return new CreateUserDto
+					(
+						user.Name,
+						user.Bio,
+						user.PhoneNumber,
+						user.Email
+					) as TDto;
+					
+				case User user when typeof(TDto) == typeof(UpdateUserDto):
+					return new UpdateUserDto
+					(
+						user.Name,
+						user.Bio,
+						user.PhoneNumber,
+						user.Email
+					) as TDto;
+					
+				case Advertisement advertisement when typeof(TDto) == typeof(AdvertisementDto):
+					return new AdvertisementDto
+					(
+						advertisement.Id,
+						advertisement.Title,
+						advertisement.Description,
+						advertisement.Condition,
+						advertisement.Price,
+						advertisement.CreatedDate,
+						advertisement.userId,
+						advertisement.categoryId
+					) as TDto;
+					
+				case Advertisement advertisement when typeof(TDto) == typeof(CreateAdvertisementDto):
+					return new CreateAdvertisementDto
+					(
+						advertisement.Title,
+						advertisement.Description,
+						advertisement.Condition,
+						advertisement.Price,
+						advertisement.userId,
+						advertisement.categoryId
+					) as TDto;
+					
+				case Advertisement advertisement when typeof(TDto) == typeof(UpdateAdvertisementDto):
+					return new UpdateAdvertisementDto
+					(
+						advertisement.Title,
+						advertisement.Description,
+						advertisement.Condition,
+						advertisement.Price,
+						advertisement.userId,
+						advertisement.categoryId
+					) as TDto;
+					
+				default:
+					return null;
 			};
 		}
 		
