@@ -1,7 +1,4 @@
-using System.Net;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SellnBuy.Api;
@@ -42,7 +39,7 @@ namespace SellnBuy.UnitTests
 			ActionResult<UserDto>? result;
 			try
 			{
-				result = await controller.GetAsync(Guid.NewGuid());
+				result = await controller.GetAsync(It.IsAny<Guid>());
 			}
 			catch (NotFoundException)
 			{
@@ -67,7 +64,7 @@ namespace SellnBuy.UnitTests
 			ActionResult<UserDto> result;
 			try
 			{
-				result = await controller.GetAsync(Guid.NewGuid());
+				result = await controller.GetAsync(It.IsAny<Guid>());
 			}
 			catch (NotFoundException)
 			{
@@ -98,7 +95,7 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 
 			// Act
-			var result = await controller.GetAllAsync(It.IsAny<string>());
+			var result = await controller.GetAllAsync();
 
 			// Assert
 			result.Should().BeEquivalentTo(allUsers);
