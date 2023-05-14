@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SellnBuy.Api.Entities;
-using SellnBuy.Api.Repositories;
-using SellnBuy.Api;
 using SellnBuy.Api.Services;
 
 namespace SellnBuy.Api.Controllers
@@ -31,7 +29,7 @@ namespace SellnBuy.Api.Controllers
 		// GET /T/{id}
 		[HttpGet]
 		[Route("{id}")]
-		public async Task<ActionResult<TDto>> GetAsync(Guid id)
+		public async Task<TDto> GetAsync(Guid id)
 		{	
 			return await service.GetAsync(id);
 		}
