@@ -36,7 +36,7 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 
 			// Act
-			ActionResult<UserDto>? result;
+			ActionResult<UserDto> result;
 			try
 			{
 				result = await controller.GetAsync(It.IsAny<Guid>());
