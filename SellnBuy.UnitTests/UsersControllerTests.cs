@@ -16,6 +16,18 @@ namespace SellnBuy.UnitTests
 	public class UsersControllerTests
 	{
 		private readonly Mock<IService<User, UserDto, CreateUserDto, UpdateUserDto>> serviceStub = new();
+		private User CreateRandomUser(string? name = null)
+		{
+			return new()
+			{
+				Id = Guid.NewGuid(),
+				Name = name ?? Guid.NewGuid().ToString(),
+				Bio = Guid.NewGuid().ToString(),
+				PhoneNumber = Guid.NewGuid().ToString(),
+				Email = Guid.NewGuid().ToString(),
+				CreatedDate = DateTimeOffset.UtcNow
+			};
+		}
 		
 		[Fact]
 		public async Task GetAsync_WithUnexistingUser_ReturnsNotFound()
@@ -39,19 +51,6 @@ namespace SellnBuy.UnitTests
 			
 			// Assert
 			result.Result.Should().BeOfType<NotFoundResult>();
-		}
-		
-		private User CreateRandomUser(string? name = null)
-		{
-			return new()
-			{
-				Id = Guid.NewGuid(),
-				Name = name ?? Guid.NewGuid().ToString(),
-				Bio = Guid.NewGuid().ToString(),
-				PhoneNumber = Guid.NewGuid().ToString(),
-				Email = Guid.NewGuid().ToString(),
-				CreatedDate = DateTimeOffset.UtcNow
-			};
 		}
 		
 		[Fact]
