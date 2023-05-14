@@ -49,8 +49,8 @@ namespace SellnBuy.Api
 						advertisement.Condition,
 						advertisement.Price,
 						advertisement.CreatedDate,
-						advertisement.userId,
-						advertisement.categoryId
+						advertisement.UserId,
+						advertisement.CategoryId
 					) as TDto;
 					
 				case Advertisement advertisement when typeof(TDto) == typeof(CreateAdvertisementDto):
@@ -60,8 +60,8 @@ namespace SellnBuy.Api
 						advertisement.Description,
 						advertisement.Condition,
 						advertisement.Price,
-						advertisement.userId,
-						advertisement.categoryId
+						advertisement.UserId,
+						advertisement.CategoryId
 					) as TDto;
 					
 				case Advertisement advertisement when typeof(TDto) == typeof(UpdateAdvertisementDto):
@@ -71,8 +71,8 @@ namespace SellnBuy.Api
 						advertisement.Description,
 						advertisement.Condition,
 						advertisement.Price,
-						advertisement.userId,
-						advertisement.categoryId
+						advertisement.UserId,
+						advertisement.CategoryId
 					) as TDto;
 					
 				default:
@@ -114,8 +114,8 @@ namespace SellnBuy.Api
 					Condition = advertisementDto.Condition,
 					Price = advertisementDto.Price,
 					CreatedDate = createdDate,
-					userId = advertisementDto.userId,
-					categoryId = advertisementDto.categoryId
+					UserId = advertisementDto.userId,
+					CategoryId = advertisementDto.categoryId
 				 } as T,	
 				 			
 				UpdateAdvertisementDto advertisementDto => new Advertisement
@@ -126,8 +126,8 @@ namespace SellnBuy.Api
 					Condition = advertisementDto.Condition,
 					Price = advertisementDto.Price,
 					CreatedDate = createdDate,
-					userId = advertisementDto.userId,
-					categoryId = advertisementDto.categoryId
+					UserId = advertisementDto.userId,
+					CategoryId = advertisementDto.categoryId
 				 } as T,
 				 
 				_ => throw new NotSupportedException($"Type {typeof(TDto).FullName} not supported")

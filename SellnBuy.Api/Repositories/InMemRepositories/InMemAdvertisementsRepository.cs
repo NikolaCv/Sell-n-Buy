@@ -15,8 +15,8 @@ namespace SellnBuy.Api.Repositories.InMemRepositories
 				Price = 3500,
 				Condition = Condition.Used,
 				CreatedDate = DateTimeOffset.UtcNow,
-				userId = Guid.NewGuid(),
-				categoryId = Guid.NewGuid()
+				UserId = Guid.NewGuid(),
+				CategoryId = Guid.NewGuid()
 			},
 			new Advertisement
 			{
@@ -26,8 +26,8 @@ namespace SellnBuy.Api.Repositories.InMemRepositories
 				Price = 4000,
 				Condition = Condition.Used,
 				CreatedDate = DateTimeOffset.UtcNow,
-				userId = Guid.NewGuid(),
-				categoryId = Guid.NewGuid()
+				UserId = Guid.NewGuid(),
+				CategoryId = Guid.NewGuid()
 			}
 		})
 		{
