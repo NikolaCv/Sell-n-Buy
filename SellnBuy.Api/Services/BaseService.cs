@@ -17,7 +17,7 @@ namespace SellnBuy.Api.Services
 			this.repository = repository;
 		}
 
-		public abstract Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm);
+		public abstract Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
 
 		public async Task<TDto> GetAsync(Guid id)
 		{
