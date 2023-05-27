@@ -11,8 +11,8 @@ namespace SellnBuy.Api.Entities
 		Condition Condition,
 		decimal Price,
 		DateTimeOffset CreatedDate,
-		Guid userId,
-		Guid categoryId
+		Guid UserId,
+		Guid CategoryId
 	);
 	
 	public record CreateAdvertisementDto
@@ -21,8 +21,8 @@ namespace SellnBuy.Api.Entities
 		string Description,
 		[Required] Condition Condition,
 		[Required] decimal Price,
-		[Required] Guid userId,
-		[Required] Guid categoryId
+		[Required] Guid UserId,
+		[Required] Guid CategoryId
 	);
 	
 	public record UpdateAdvertisementDto
@@ -31,7 +31,7 @@ namespace SellnBuy.Api.Entities
 		string Description,
 		[Required] Condition Condition,
 		[Required] decimal Price,
-		[Required] Guid userId,
-		[Required] Guid categoryId
+		[Required] Guid UserId,
+		[Required] Guid CategoryId
 	);
 }
