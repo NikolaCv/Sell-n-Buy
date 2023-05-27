@@ -27,7 +27,7 @@ namespace SellnBuy.UnitTests
 		}
 		
 		[Fact]
-		public async Task GetAsync_WithUnexistingUser_ReturnsNotFound()
+		public async Task GetAsync_WithUnexistingUser_ThrowsNotFound()
 		{
 			// Arrange
 			serviceStub.Setup(service => service.GetAsync(It.IsAny<Guid>()))
@@ -36,18 +36,10 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 
 			// Act
-			ActionResult<UserDto> result;
-			try
-			{
-				result = await controller.GetAsync(It.IsAny<Guid>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
-			
+			Func<Task> act = async () => await controller.GetAsync(It.IsAny<Guid>());
+
 			// Assert
-			result.Result.Should().BeOfType<NotFoundResult>();
+			await act.Should().ThrowAsync<NotFoundException>();
 		}
 		
 		[Fact]
@@ -149,7 +141,7 @@ namespace SellnBuy.UnitTests
 		}
 		
 		[Fact]
-		public async Task UpdateAsync_WithUnexistingUser_ReturnsNotFound()
+		public async Task UpdateAsync_WithUnexistingUser_ThrowsNotFound()
 		{
 			// Arrange
 			serviceStub.Setup(service => service.UpdateAsync(It.IsAny<Guid>(), It.IsAny<UpdateUserDto>()))
@@ -158,18 +150,10 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 			
 			// Act
-			ActionResult result;
-			try
-			{
-				result = await controller.UpdateAsync(It.IsAny<Guid>(), It.IsAny<UpdateUserDto>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
+			Func<Task> act = async () => await controller.UpdateAsync(It.IsAny<Guid>(), It.IsAny<UpdateUserDto>());
 			
 			// Assert
-			result.Should().BeOfType<NotFoundResult>();
+			await act.Should().ThrowAsync<NotFoundException>();
 		}
 		
 		[Fact]
@@ -197,7 +181,7 @@ namespace SellnBuy.UnitTests
 		}
 		
 		[Fact]
-		public async Task DeleteAsync_WithUnexistingUser_ReturnsNotFound()
+		public async Task DeleteAsync_WithUnexistingUser_ThrowsNotFound()
 		{
 			// Arrange
 			serviceStub.Setup(service => service.DeleteAsync(It.IsAny<Guid>()))
@@ -206,18 +190,10 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 			
 			// Act
-			ActionResult result;
-			try
-			{
-				result = await controller.DeleteAsync(It.IsAny<Guid>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
+			Func<Task> act = async () => await controller.DeleteAsync(It.IsAny<Guid>());
 			
 			// Assert
-			result.Should().BeOfType<NotFoundResult>();
+			await act.Should().ThrowAsync<NotFoundException>();
 		}
 		
 		[Fact]
