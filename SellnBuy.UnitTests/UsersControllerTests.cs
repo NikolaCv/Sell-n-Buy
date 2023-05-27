@@ -132,7 +132,7 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 
 			// Act
-			var result = await controller.CreateAsync(createdUser.AsDto<User, CreateUserDto>());
+			var result = await controller.CreateAsync(It.IsAny<CreateUserDto>());
 			
 			// Assert
 			result.Result.Should().BeOfType<CreatedAtActionResult>();
@@ -166,15 +166,7 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 			
 			// Act
-			ActionResult result;
-			try
-			{
-				result = await controller.UpdateAsync(It.IsAny<Guid>(), It.IsAny<UpdateUserDto>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
+			var	result = await controller.UpdateAsync(It.IsAny<Guid>(), It.IsAny<UpdateUserDto>());
 			
 			// Assert
 			result.Should().BeOfType<NoContentResult>();
@@ -206,16 +198,8 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 			
 			// Act
-			ActionResult result;
-			try
-			{
-				result = await controller.DeleteAsync(It.IsAny<Guid>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
-			
+			var result = await controller.DeleteAsync(It.IsAny<Guid>());
+
 			// Assert
 			result.Should().BeOfType<NoContentResult>();
 		}
