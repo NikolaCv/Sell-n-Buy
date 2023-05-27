@@ -55,18 +55,10 @@ namespace SellnBuy.UnitTests
 			var controller = new AdvertisementsController(serviceStub.Object);
 			
 			// Act
-			ActionResult<AdvertisementDto> result;
-			try
-			{
-				result = await controller.GetAsync(It.IsAny<Guid>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
+			var	result = await controller.GetAsync(It.IsAny<Guid>());
 			
 			// Assert
-			result.Value.Should().BeEquivalentTo(advertisementDto);
+			result.Should().BeEquivalentTo(advertisementDto);
 		}
 		
 		[Fact]
