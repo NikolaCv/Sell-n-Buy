@@ -114,8 +114,8 @@ namespace SellnBuy.Api
 					Condition = advertisementDto.Condition,
 					Price = advertisementDto.Price,
 					CreatedDate = createdDate,
-					UserId = advertisementDto.userId,
-					CategoryId = advertisementDto.categoryId
+					UserId = advertisementDto.UserId,
+					CategoryId = advertisementDto.CategoryId
 				 } as T,	
 				 			
 				UpdateAdvertisementDto advertisementDto => new Advertisement
@@ -126,8 +126,8 @@ namespace SellnBuy.Api
 					Condition = advertisementDto.Condition,
 					Price = advertisementDto.Price,
 					CreatedDate = createdDate,
-					UserId = advertisementDto.userId,
-					CategoryId = advertisementDto.categoryId
+					UserId = advertisementDto.UserId,
+					CategoryId = advertisementDto.CategoryId
 				 } as T,
 				 
 				_ => throw new NotSupportedException($"Type {typeof(TDto).FullName} not supported")
