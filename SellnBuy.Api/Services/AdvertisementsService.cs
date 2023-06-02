@@ -8,9 +8,9 @@ using SellnBuy.Api.Repositories;
 
 namespace SellnBuy.Api.Services
 {
-	public class AdvertisementService : BaseService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>
+	public class AdvertisementsService : BaseService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>
 	{
-		public AdvertisementService(IRepository<Advertisement> repository) : base(repository)
+		public AdvertisementsService(IRepository<Advertisement> repository) : base(repository)
 		{
 		}
 		

@@ -8,9 +8,9 @@ using SellnBuy.Api.Repositories;
 
 namespace SellnBuy.Api.Services
 {
-	public class UserService : BaseService<User, UserDto, CreateUserDto, UpdateUserDto>
+	public class UsersService : BaseService<User, UserDto, CreateUserDto, UpdateUserDto>
 	{
-		public UserService(IRepository<User> repository) : base(repository)
+		public UsersService(IRepository<User> repository) : base(repository)
 		{
 		}
 		

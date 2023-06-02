@@ -28,8 +28,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IRepository<User>, InMemUsersRepository>();
 builder.Services.AddSingleton<IRepository<Advertisement>, InMemAdvertisementsRepository>();
 
-builder.Services.AddScoped<IService<User, UserDto, CreateUserDto, UpdateUserDto>, UserService>();
-builder.Services.AddScoped<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>, AdvertisementService>();
+builder.Services.AddScoped<IService<User, UserDto, CreateUserDto, UpdateUserDto>, UsersService>();
+builder.Services.AddScoped<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>, AdvertisementsService>();
 
 //builder.Services.AddSingleton<IRepository<User>, >();
 //builder.Services.AddSingleton<IRepository<Advertisement>, InMemAdvertisementsRepository>();
