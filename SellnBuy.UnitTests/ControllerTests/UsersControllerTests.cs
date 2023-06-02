@@ -8,11 +8,12 @@ using SellnBuy.Api.Exceptions;
 using SellnBuy.Api.Services;
 using Xunit;
 
-namespace SellnBuy.UnitTests
+namespace SellnBuy.UnitTests.ControllerTests
 {
 	public class UsersControllerTests
 	{
 		private readonly Mock<IService<User, UserDto, CreateUserDto, UpdateUserDto>> serviceStub = new();
+		
 		private User CreateRandomUser(string? name = null)
 		{
 			return new()
@@ -25,6 +26,7 @@ namespace SellnBuy.UnitTests
 				CreatedDate = DateTimeOffset.UtcNow
 			};
 		}
+		
 		
 		[Fact]
 		public async Task GetAsync_WithUnexistingUser_ThrowsNotFound()
@@ -42,6 +44,7 @@ namespace SellnBuy.UnitTests
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
 		
+		
 		[Fact]
 		public async Task GetAsync_WithExistingUser_ReturnsExpectedUser()
 		{
@@ -53,23 +56,16 @@ namespace SellnBuy.UnitTests
 			var controller = new UsersController(serviceStub.Object);
 
 			// Act
-			ActionResult<UserDto> result;
-			try
-			{
-				result = await controller.GetAsync(It.IsAny<Guid>());
-			}
-			catch (NotFoundException)
-			{
-				result = new NotFoundResult();
-			}
+			var result = await controller.GetAsync(It.IsAny<Guid>());
 			
 			// Assert
-			result.Value.Should().BeEquivalentTo(expectedUserDto,
+			result.Should().BeEquivalentTo(expectedUserDto,
 						options =>
 						options.Using<DateTimeOffset>(ctx => 
 						ctx.Subject.Should().BeCloseTo(expectedUserDto.CreatedDate, new TimeSpan(0, 0, 0, 1)))
 						.WhenTypeIs<DateTimeOffset>());
 		}
+		
 		
 		[Fact]
 		public async Task GetAllAsync_WithExistingUsers_ReturnsAllUsers()
@@ -93,11 +89,12 @@ namespace SellnBuy.UnitTests
 			result.Should().BeEquivalentTo(allUsers);
 		}
 		
+		
 		[Fact]
 		public async Task GetAllAsync_WithMachingUsers_ReturnsMachingUsers()
 		{
 			// Arrange
-			var allUsers = new[]
+			var allUsersDto = new[]
 			{
 				CreateRandomUser("Nikola Aleksic").AsDto<User, UserDto>(),
 				CreateRandomUser("Aleksa Markovic").AsDto<User, UserDto>(),
@@ -108,7 +105,7 @@ namespace SellnBuy.UnitTests
 			
 			serviceStub.Setup(service => service.GetAllAsync(It.IsAny<string>()))
 							 .ReturnsAsync((string nameToMatch) =>
-								allUsers.Where(user =>
+								allUsersDto.Where(user =>
 								user.Name.Contains(nameToMatch, StringComparison.OrdinalIgnoreCase)));
 
 			var controller = new UsersController(serviceStub.Object);
@@ -118,8 +115,9 @@ namespace SellnBuy.UnitTests
 
 			// Assert
 			result.Should().OnlyContain(user =>
-			user.Name == allUsers[1].Name || user.Name == allUsers[2].Name);
+			user.Name == allUsersDto[1].Name || user.Name == allUsersDto[2].Name);
 		}
+		
 		
 		[Fact]
 		public async Task CreateAsync_WithUserToCreate_ReturnsCreatedUser()
@@ -140,6 +138,7 @@ namespace SellnBuy.UnitTests
 			createdResult?.Value.Should().BeEquivalentTo(createdUser.AsDto<User, UserDto>());
 		}
 		
+		
 		[Fact]
 		public async Task UpdateAsync_WithUnexistingUser_ThrowsNotFound()
 		{
@@ -155,6 +154,7 @@ namespace SellnBuy.UnitTests
 			// Assert
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
+		
 		
 		[Fact]
 		public async Task UpdateAsync_WithExistingUser_ReturnsNoContent()
@@ -172,6 +172,7 @@ namespace SellnBuy.UnitTests
 			result.Should().BeOfType<NoContentResult>();
 		}
 		
+		
 		[Fact]
 		public async Task DeleteAsync_WithUnexistingUser_ThrowsNotFound()
 		{
@@ -187,6 +188,7 @@ namespace SellnBuy.UnitTests
 			// Assert
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
+		
 		
 		[Fact]
 		public async Task DeleteAsync_WithExistingUser_ReturnsNoContent()

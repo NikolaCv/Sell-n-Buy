@@ -10,11 +10,12 @@ using SellnBuy.Api.Exceptions;
 using SellnBuy.Api.Services;
 using Xunit;
 
-namespace SellnBuy.UnitTests
+namespace SellnBuy.UnitTests.ControllerTests
 {
 	public class AdvertisementsControllerTests
 	{
 		private readonly Mock<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>> serviceStub = new();
+		
 		private Advertisement CreateRandomAdvertisement(string? title = null)
 		{
 			return new()
@@ -27,6 +28,7 @@ namespace SellnBuy.UnitTests
 				CategoryId = Guid.NewGuid()
 			};
 		}
+		
 		
 		[Fact]
 		public async Task GetAsync_WithUnexistingAdvertisement_ThrowsNotFound()
@@ -44,6 +46,7 @@ namespace SellnBuy.UnitTests
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
 		
+		
 		[Fact]
 		public async Task GetAsync_WithExistingAdvertisement_ReturnsExpectedAdvertisement()
 		{
@@ -60,6 +63,7 @@ namespace SellnBuy.UnitTests
 			// Assert
 			result.Should().BeEquivalentTo(advertisementDto);
 		}
+		
 		
 		[Fact]
 		public async Task GetAllAsync_WithExistingAdvertisements_ReturnsAllAdvertisements()
@@ -82,8 +86,8 @@ namespace SellnBuy.UnitTests
 			
 			// Assert
 			result.Should().BeEquivalentTo(allAdvertisements);
-
 		}
+		
 		
 		[Fact]
 		public async Task GetAllAsync_WithMachingAdvertisements_ReturnsMachingAdvertisements()
@@ -114,6 +118,7 @@ namespace SellnBuy.UnitTests
 			ad.Title == allAdvertisements[1].Title || ad.Title == allAdvertisements[3].Title);
 		}
 		
+		
 		[Fact]
 		public async Task CreateAsync_WithAdvertisementToCreate_ReturnsCreatedAdvertisement()
 		{
@@ -133,6 +138,7 @@ namespace SellnBuy.UnitTests
 			createdResult?.Value.Should().BeEquivalentTo(createdAdvertisement);
 		}
 		
+		
 		[Fact]
 		public async Task UpdateAsync_WithUnexistingAdvertisement_ThrowsNotFound()
 		{
@@ -148,6 +154,7 @@ namespace SellnBuy.UnitTests
 			// Assert
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
+		
 		
 		[Fact]
 		public async Task UpdateAsync_WithExistingAdvertisement_ReturnsNoContent()
@@ -166,6 +173,7 @@ namespace SellnBuy.UnitTests
 			result.Should().BeOfType<NoContentResult>();
 		}
 		
+		
 		[Fact]
 		public async Task DeleteAsync_WithUnexistingAdvertisement_ThrowsNotFound()
 		{
@@ -181,6 +189,7 @@ namespace SellnBuy.UnitTests
 			// Assert
 			await act.Should().ThrowAsync<NotFoundException>();
 		}
+		
 		
 		[Fact]
 		public async Task DeleteAsync_WithExistingAdvertisement_ReturnsNoContent()
