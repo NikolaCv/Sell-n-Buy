@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Moq;
+using SellnBuy.Api;
 using SellnBuy.Api.Entities;
 using SellnBuy.Api.Exceptions;
 using SellnBuy.Api.Repositories;
@@ -114,6 +115,27 @@ namespace SellnBuy.UnitTests.ServiceTests
 			user.Name == allUsers[1].Name || user.Name == allUsers[2].Name);
 		}
 		
+
+		[Fact]
+		public async Task CreateAsync_WithUserToCreate_ReturnsCreatedUser()
+		{
+			// Arange
+			var createdUser = CreateRandomUser();
+
+			var service = new UsersService(repositoryStub.Object);
+
+			// Act
+			var result = await service.CreateAsync(createdUser.AsDto<User, CreateUserDto>());
+
+			// Assert
+			result.Item1.Should().BeEquivalentTo(createdUser.AsDto<User, UserDto>(),
+								options =>	options.Excluding(x => x.Id).Excluding(x => x.CreatedDate));
+			result.Item1.Id.Should().NotBeEmpty();
+			result.Item1.CreatedDate.Should().BeCloseTo(DateTimeOffset.UtcNow, new TimeSpan(0, 0, 0, 1));
+			result.Item2.Should().NotBeEmpty();
+		}
+
+
 		// Arange
 		
 		// Act
