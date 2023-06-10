@@ -124,8 +124,9 @@ namespace SellnBuy.UnitTests.ControllerTests
 		{
 			// Arrange
 			var createdAdvertisement = CreateRandomAdvertisement();
+			var createdAdvertisementDto = createdAdvertisement.AsDto<Advertisement, AdvertisementDto>();
 			serviceStub.Setup(service => service.CreateAsync(It.IsAny<CreateAdvertisementDto>()))
-							 .ReturnsAsync(createdAdvertisement);
+							 .ReturnsAsync((createdAdvertisementDto, createdAdvertisement.Id));
 							 
 			var controller = new AdvertisementsController(serviceStub.Object);
 			
@@ -135,7 +136,7 @@ namespace SellnBuy.UnitTests.ControllerTests
 			// Assert
 			result.Result.Should().BeOfType<CreatedAtActionResult>();
 			var createdResult = result.Result as CreatedAtActionResult;
-			createdResult?.Value.Should().BeEquivalentTo(createdAdvertisement);
+			createdResult?.Value.Should().BeEquivalentTo(createdAdvertisementDto);
 		}
 		
 		

@@ -124,8 +124,10 @@ namespace SellnBuy.UnitTests.ControllerTests
 		{
 			// Arrange
 			var createdUser = CreateRandomUser();
+			var createdUserDto = createdUser.AsDto<User, UserDto>();
+			
 			serviceStub.Setup(service => service.CreateAsync(It.IsAny<CreateUserDto>()))
-							 .ReturnsAsync(createdUser);
+							 .ReturnsAsync((createdUserDto, createdUser.Id));
 							
 			var controller = new UsersController(serviceStub.Object);
 
@@ -135,7 +137,7 @@ namespace SellnBuy.UnitTests.ControllerTests
 			// Assert
 			result.Result.Should().BeOfType<CreatedAtActionResult>();
 			var createdResult = result.Result as CreatedAtActionResult;
-			createdResult?.Value.Should().BeEquivalentTo(createdUser.AsDto<User, UserDto>());
+			createdResult?.Value.Should().BeEquivalentTo(createdUserDto);
 		}
 		
 		
