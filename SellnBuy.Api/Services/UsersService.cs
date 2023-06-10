@@ -16,13 +16,12 @@ namespace SellnBuy.Api.Services
 		
         public override async Task<IEnumerable<UserDto>> GetAllAsync(string? name = null)
         {
-            var users = (await repository.GetAllAsync())
-						.Select(user => user.AsDto<User, UserDto>());
+            var users = await repository.GetAllAsync();
 			
 			if (!string.IsNullOrWhiteSpace(name))
 				users = users.Where(user => user.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
 			
-			return users;
+			return users.Select(user => user.AsDto<User, UserDto>());
         }
     }
 }

@@ -16,13 +16,12 @@ namespace SellnBuy.Api.Services
 		
         public override async Task<IEnumerable<AdvertisementDto>> GetAllAsync(string? title = null)
         {
-            var advertisements = (await repository.GetAllAsync())
-						.Select(advertisement => advertisement.AsDto<Advertisement, AdvertisementDto>());
+            var advertisements = await repository.GetAllAsync();
 			
 			if (!string.IsNullOrWhiteSpace(title))
 				advertisements = advertisements.Where(item => item.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
 			
-			return advertisements;
+			return advertisements.Select(advertisement => advertisement.AsDto<Advertisement, AdvertisementDto>());
         }
     }
 }
