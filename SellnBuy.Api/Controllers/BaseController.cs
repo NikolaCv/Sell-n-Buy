@@ -38,8 +38,8 @@ namespace SellnBuy.Api.Controllers
 		[HttpPost]
 		public async Task<ActionResult<TDto>> CreateAsync(CreateTDto itemDto)
 		{
-			var item = await service.CreateAsync(itemDto);
-			return CreatedAtAction(nameof(CreateAsync), new { id = item.Id }, item.AsDto<T, TDto>());
+			var (createdItemDto, createdId) = await service.CreateAsync(itemDto);
+			return CreatedAtAction(nameof(CreateAsync), new { id = createdId }, createdItemDto);
 		}
 		
 		// PUT /T/{id}
