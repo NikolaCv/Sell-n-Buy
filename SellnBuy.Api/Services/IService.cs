@@ -14,7 +14,7 @@ namespace SellnBuy.Api.Services
 	{
 		Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
 		Task<TDto> GetAsync(Guid id);
-		Task<T> CreateAsync(CreateTDto item);
+		Task<(TDto, Guid)> CreateAsync(CreateTDto item);
 		Task DeleteAsync(Guid id);
 		Task UpdateAsync(Guid id, UpdateTDto itemDto);
 	}

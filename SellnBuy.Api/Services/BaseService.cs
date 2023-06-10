@@ -28,13 +28,13 @@ namespace SellnBuy.Api.Services
 			return item.AsDto<T, TDto>();
 		}
 		
-		public async Task<T> CreateAsync(CreateTDto itemDto)
+		public async Task<(TDto, Guid)> CreateAsync(CreateTDto itemDto)
 		{
 			var newItem = itemDto.AsEntity<T, CreateTDto>(Guid.NewGuid(), DateTimeOffset.UtcNow);
 			
 			await repository.CreateAsync(newItem);
 			
-			return newItem;
+			return (newItem.AsDto<T, TDto>(), newItem.Id);
 		}
 
 		public async Task UpdateAsync(Guid id, UpdateTDto itemDto)
