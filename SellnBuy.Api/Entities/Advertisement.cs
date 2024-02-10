@@ -1,14 +1,25 @@
-using SellnBuy.Api.Enums;
+using System.ComponentModel.DataAnnotations;
 
-namespace SellnBuy.Api.Entities
+namespace SellnBuy.Api.Entities;
+
+public class Advertisement : BaseEntity
 {
-	public class Advertisement : BaseEntity
-	{
-		public string Title { get; set; }
-		public string Description { get; set; }
-		public Condition Condition {get; set;}
-		public decimal Price { get; set; }
-		public Guid UserId { get; set; }
-		public Guid CategoryId { get; set; }
-	}
+	[Required]
+	[StringLength(50)]
+	public required string Title { get; set; }
+
+	public string? Description { get; set; }
+
+	[Required]
+	[Range(0, 10e8)]
+	public decimal Price { get; set; }
+
+	[Required]
+	public int ConditionId { get; set; }
+
+	[Required]
+	public int UserId { get; set; }
+
+	[Required]
+	public int CategoryId { get; set; }
 }
