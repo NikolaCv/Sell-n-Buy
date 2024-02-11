@@ -4,22 +4,13 @@ namespace SellnBuy.Api.Entities;
 
 public class Advertisement : BaseEntity
 {
-	[Required]
-	[StringLength(50)]
-	public required string Title { get; set; }
-
+	[StringLength(50)] public required string Title { get; set; }
 	public string? Description { get; set; }
-
-	[Required]
-	[Range(0, 10e8)]
-	public decimal Price { get; set; }
-
-	[Required]
+	[Range(1, 10e8)] public decimal Price { get; set; }
 	public int ConditionId { get; set; }
-
-	[Required]
+	public Condition? Condition { get; set; }
 	public int UserId { get; set; }
-
-	[Required]
+	public User? User { get; set; }
 	public int CategoryId { get; set; }
+	public Category? Category { get; set; }
 }

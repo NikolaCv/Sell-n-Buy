@@ -9,24 +9,27 @@ public record AdvertisementDto(
 	decimal Price,
 	DateTimeOffset CreatedDate,
 	int ConditionId,
+	Condition Condition,
+	int UserId,
+	User User,
+	int CategoryId,
+	Category Category
+);
+
+public record CreateAdvertisementDto(
+	[StringLength(50)] string Title,
+	string? Description,
+	[Range(1, 10e8)] decimal Price,
+	int ConditionId,
 	int UserId,
 	int CategoryId
 );
 
-public record CreateAdvertisementDto(
-	[Required][StringLength(50)] string Title,
-	string? Description,
-	[Required][Range(0, 10e8)] decimal Price,
-	[Required] int ConditionId,
-	[Required] int UserId,
-	[Required] int CategoryId
-);
-
 public record UpdateAdvertisementDto(
-	[Required][StringLength(50)] string Title,
+	[StringLength(50)] string Title,
 	string? Description,
-	[Required][Range(0, 10e8)] decimal Price,
-	[Required] int ConditionID,
-	[Required] int UserId,
-	[Required] int CategoryId
+	[Range(1, 10e8)] decimal Price,
+	int ConditionId,
+	int UserId,
+	int CategoryId
 );
