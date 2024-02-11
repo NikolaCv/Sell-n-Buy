@@ -8,9 +8,6 @@ namespace SellnBuy.Api.Controllers;
 [Route("[controller]")]
 public abstract class BaseController<T, TDto, CreateTDto, UpdateTDto> : ControllerBase
 where T : BaseEntity
-where TDto : class
-where CreateTDto : class
-where UpdateTDto : class
 {
 	protected readonly IService<T, TDto, CreateTDto, UpdateTDto> service;
 

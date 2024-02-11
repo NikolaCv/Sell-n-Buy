@@ -7,9 +7,6 @@ namespace SellnBuy.Api.Services;
 
 public abstract class BaseService<T, TDto, CreateTDto, UpdateTDto> : IService<T, TDto, CreateTDto, UpdateTDto>
 where T : BaseEntity
-where TDto : class
-where CreateTDto : class
-where UpdateTDto : class
 {
 	protected readonly IMapper mapper;
 
@@ -22,7 +19,6 @@ where UpdateTDto : class
 	}
 
 	public abstract Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
-
 	public async Task<TDto> GetAsync(int id)
 	{
 		var item = await repository.GetAsync(id) ?? throw new NotFoundException();

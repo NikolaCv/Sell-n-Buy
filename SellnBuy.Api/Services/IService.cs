@@ -9,11 +9,8 @@ namespace SellnBuy.Api.Services;
 
 public interface IService<T, TDto, CreateTDto, UpdateTDto>
 where T : BaseEntity
-where TDto : class
-where CreateTDto : class
-where UpdateTDto : class
 {
-	Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
+	Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm);
 	Task<TDto> GetAsync(int id);
 	Task<(TDto, int)> CreateAsync(CreateTDto item);
 	Task DeleteAsync(int id);
