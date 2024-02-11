@@ -44,9 +44,13 @@ builder.Services.AddSqlServer<SellnBuyContext>(connectionString);
 
 builder.Services.AddScoped<IRepository<User>, EntityFrameworkUsersRepository>();
 builder.Services.AddScoped<IRepository<Advertisement>, EntityFrameworkAdvertisementsRepository>();
+builder.Services.AddScoped<IRepository<Condition>, EntityFrameworkConditionsRepository>();
+builder.Services.AddScoped<IRepository<Category>, EntityFrameworkCategoriesRepository>();
 
 builder.Services.AddScoped<IService<User, UserDto, CreateUserDto, UpdateUserDto>, UsersService>();
 builder.Services.AddScoped<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>, AdvertisementsService>();
+builder.Services.AddScoped<IService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>, ConditionsService>();
+builder.Services.AddScoped<IService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>, CategoriesService>();
 
 var app = builder.Build();
 
