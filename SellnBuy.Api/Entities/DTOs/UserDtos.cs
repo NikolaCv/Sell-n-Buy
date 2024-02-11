@@ -12,15 +12,15 @@ public record UserDto(
 );
 
 public record CreateUserDto(
-	[Required][StringLength(50)] string Name,
+	[StringLength(50)] string Name,
 	string? Bio,
 	string? PhoneNumber,
-	[Required][StringLength(50)] string Email
+	[StringLength(50)] string Email
 );
 
 public record UpdateUserDto(
-	[Required][StringLength(50)] string Name,
+	[StringLength(50)] string Name,
 	string? Bio,
 	string? PhoneNumber,
-	[Required][StringLength(50)] string Email
+	[StringLength(50)] string Email
 );
