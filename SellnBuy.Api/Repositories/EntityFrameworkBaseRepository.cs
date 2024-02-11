@@ -6,7 +6,7 @@ namespace SellnBuy.Api.Repositories;
 
 public class EntityFrameworkBaseRepository<T> : IRepository<T> where T : BaseEntity
 {
-	private readonly SellnBuyContext dbContext;
+	protected readonly SellnBuyContext dbContext;
 
 	public EntityFrameworkBaseRepository(SellnBuyContext dbContext)
 	{
@@ -25,12 +25,12 @@ public class EntityFrameworkBaseRepository<T> : IRepository<T> where T : BaseEnt
 						.ExecuteDeleteAsync();
 	}
 
-	public async Task<IEnumerable<T>> GetAllAsync()
+	public virtual async Task<IEnumerable<T>> GetAllAsync()
 	{
 		return await dbContext.Set<T>().AsNoTracking().ToListAsync();
 	}
 
-	public async Task<T?> GetAsync(int id)
+	public virtual async Task<T?> GetAsync(int id)
 	{
 		return await dbContext.Set<T>().FindAsync(id);
 	}
