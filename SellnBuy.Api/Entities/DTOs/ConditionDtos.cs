@@ -3,17 +3,18 @@ using System.ComponentModel.DataAnnotations;
 namespace SellnBuy.Api.Entities.DTOs;
 
 public record ConditionDto(
-    int Id,
-    string Name,
-    string? Description
+	int Id,
+	string Name,
+	string? Description,
+	DateTimeOffset CreatedDate
 );
 
 public record CreateConditionDto(
-    [Required][StringLength(50)] string Name,
-    string? Description
+	[StringLength(50)] string Name,
+	string? Description
 );
 
 public record UpdateConditionDto(
-    [Required][StringLength(50)] string Name,
-    string? Description
+	[StringLength(50)] string Name,
+	string? Description
 );
