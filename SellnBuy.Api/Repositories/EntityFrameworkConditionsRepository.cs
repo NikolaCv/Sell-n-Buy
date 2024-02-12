@@ -1,6 +1,5 @@
 using SellnBuy.Api.Data;
 using SellnBuy.Api.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace SellnBuy.Api.Repositories;
 

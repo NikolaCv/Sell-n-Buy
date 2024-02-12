@@ -1,6 +1,5 @@
 using SellnBuy.Api.Repositories;
 using SellnBuy.Api.Entities;
-using MongoDB.Driver;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +10,6 @@ using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson;
 using SellnBuy.Api.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using SellnBuy.Api.Entities.DTOs;
 using SellnBuy.Api.Entities.Mapper;
 
