@@ -21,7 +21,7 @@ where T : BaseEntity
 	public abstract Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
 	public async Task<TDto> GetAsync(int id)
 	{
-		var item = await repository.GetAsync(id) ?? throw new NotFoundException();
+		var item = await repository.GetAsync(id) ?? throw new NotFoundException(typeof(T));
 		return mapper.Map<TDto>(item);
 	}
 
@@ -36,7 +36,7 @@ where T : BaseEntity
 
 	public async Task UpdateAsync(int id, UpdateTDto updateItemDto)
 	{
-		var existingItem = await repository.GetAsync(id) ?? throw new NotFoundException();
+		var existingItem = await repository.GetAsync(id) ?? throw new NotFoundException(typeof(T));
 
 		mapper.Map(updateItemDto, existingItem);
 		await repository.UpdateAsync(existingItem);
@@ -44,7 +44,7 @@ where T : BaseEntity
 
 	public async Task DeleteAsync(int id)
 	{
-		var existingItem = await repository.GetAsync(id) ?? throw new NotFoundException();
+		_ = await repository.GetAsync(id) ?? throw new NotFoundException(typeof(T));
 		await repository.DeleteAsync(id);
 	}
 }
