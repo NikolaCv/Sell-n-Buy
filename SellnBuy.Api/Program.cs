@@ -12,15 +12,20 @@ using SellnBuy.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using SellnBuy.Api.Entities.DTOs;
 using SellnBuy.Api.Entities.Mapper;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers(options =>
-{
-	options.SuppressAsyncSuffixInActionNames = false;
-});
+				{
+					options.SuppressAsyncSuffixInActionNames = false;
+				})
+				.AddJsonOptions(options =>
+				{
+					options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+				});
 
 // For MongoDb
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
@@ -65,15 +70,11 @@ app.UseExceptionHandler(errorApp =>
 		{
 			case NotFoundException:
 				context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-				errorMessage = "The item with requested ID does not exist.";
 				break;
 
 			case ValidationException:
 				context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-				break;
-
-			case Exception:
-				context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+				errorMessage = "Bad Request!@";
 				break;
 
 			default:
