@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using SellnBuy.Api.Entities.Validation;
 
 namespace SellnBuy.Api.Entities.DTOs;
 
@@ -9,10 +10,10 @@ public record AdvertisementDto(
 	decimal Price,
 	DateTimeOffset CreatedDate,
 	int ConditionId,
-	Condition Condition,
 	int UserId,
-	User User,
 	int CategoryId,
+	User User,
+	Condition Condition,
 	Category Category
 );
 
@@ -20,16 +21,16 @@ public record CreateAdvertisementDto(
 	[StringLength(50)] string Title,
 	string? Description,
 	[Range(1, 10e8)] decimal Price,
-	int ConditionId,
-	int UserId,
-	int CategoryId
+	[IdRequired] int ConditionId,
+	[IdRequired] int UserId,
+	[IdRequired] int CategoryId
 );
 
 public record UpdateAdvertisementDto(
 	[StringLength(50)] string Title,
 	string? Description,
 	[Range(1, 10e8)] decimal Price,
-	int ConditionId,
-	int UserId,
-	int CategoryId
+	[IdRequired] int ConditionId,
+	[IdRequired] int UserId,
+	[IdRequired] int CategoryId
 );
