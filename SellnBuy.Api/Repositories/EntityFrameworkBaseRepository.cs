@@ -4,7 +4,7 @@ using SellnBuy.Api.Entities;
 
 namespace SellnBuy.Api.Repositories;
 
-public class EntityFrameworkBaseRepository<T> : IRepository<T> where T : BaseEntity
+public class EntityFrameworkBaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
 	protected readonly SellnBuyContext dbContext;
 
