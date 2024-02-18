@@ -9,28 +9,25 @@ public record AdvertisementDto(
 	string? Description,
 	decimal Price,
 	DateTimeOffset CreatedDate,
-	int ConditionId,
-	int UserId,
-	int CategoryId,
-	User User,
-	Condition Condition,
-	Category Category
+	UserDto User, // When renaming to EntityDto modify AdvertisementMappingProfile
+	ConditionDto Condition,
+	CategoryDto Category
 );
 
 public record CreateAdvertisementDto(
 	[StringLength(50)] string Title,
 	string? Description,
 	[Range(1, 10e8)] decimal Price,
-	[IdRequired] int ConditionId,
-	[IdRequired] int UserId,
-	[IdRequired] int CategoryId
+	[IntIdRequired] int ConditionId,
+	[StringIdRequired] string UserId,
+	[IntIdRequired] int CategoryId
 );
 
 public record UpdateAdvertisementDto(
 	[StringLength(50)] string Title,
 	string? Description,
 	[Range(1, 10e8)] decimal Price,
-	[IdRequired] int ConditionId,
-	[IdRequired] int UserId,
-	[IdRequired] int CategoryId
+	[IntIdRequired] int ConditionId,
+	[StringIdRequired] string UserId,
+	[IntIdRequired] int CategoryId
 );
