@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SellnBuy.Api.Entities;
 using SellnBuy.Api.Services;
@@ -7,11 +8,10 @@ namespace SellnBuy.Api.Controllers;
 [ApiController]
 [Route("[controller]")]
 public abstract class BaseController<T, TDto, CreateTDto, UpdateTDto> : ControllerBase
-where T : BaseEntity
 {
-	protected readonly IService<T, TDto, CreateTDto, UpdateTDto> service;
+	protected readonly IBaseService<T, TDto, CreateTDto, UpdateTDto> service;
 
-	public BaseController(IService<T, TDto, CreateTDto, UpdateTDto> service)
+	public BaseController(IBaseService<T, TDto, CreateTDto, UpdateTDto> service)
 	{
 		this.service = service;
 	}

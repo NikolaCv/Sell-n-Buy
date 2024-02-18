@@ -6,7 +6,7 @@ namespace SellnBuy.Api.Controllers;
 
 public class CategoriesController : BaseController<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>
 {
-    public CategoriesController(IService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto> service) : base(service)
+    public CategoriesController(IBaseService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto> service) : base(service)
     {
     }
 }

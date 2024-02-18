@@ -9,7 +9,7 @@ namespace SellnBuy.Api.Controllers;
 [Route("[controller]")]
 public class ConditionsController : BaseController<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>
 {
-    public ConditionsController(IService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto> service) : base(service)
+    public ConditionsController(IBaseService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto> service) : base(service)
     {
     }
 }

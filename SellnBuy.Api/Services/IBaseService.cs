@@ -2,12 +2,11 @@ using SellnBuy.Api.Entities;
 
 namespace SellnBuy.Api.Services;
 
-public interface IService<T, TDto, CreateTDto, UpdateTDto>
-where T : BaseEntity
+public interface IBaseService<T, TDto, CreateTDto, UpdateTDto>
 {
 	Task<IEnumerable<TDto>> GetAllAsync(string? searchTerm = null);
 	Task<TDto> GetAsync(int id);
-	Task<(TDto, int)> CreateAsync(CreateTDto item);
+	Task<(TDto, int)> CreateAsync(CreateTDto createItemDto);
 	Task DeleteAsync(int id);
-	Task UpdateAsync(int id, UpdateTDto itemDto);
+	Task UpdateAsync(int id, UpdateTDto updateItemDto);
 }
