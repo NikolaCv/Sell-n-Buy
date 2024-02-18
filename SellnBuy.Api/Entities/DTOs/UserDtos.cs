@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SellnBuy.Api.Entities.DTOs;
 
 public record UserDto(
-	int Id,
+	string Id,
 	string Name,
 	string? Bio,
 	string? PhoneNumber,
@@ -15,7 +15,15 @@ public record CreateUserDto(
 	[StringLength(50)] string Name,
 	string? Bio,
 	string? PhoneNumber,
-	[EmailAddress][StringLength(50)] string Email
+	[EmailAddress][StringLength(50)] string Email,
+	string Password
+);
+
+public record RegisterUserDto(
+	[StringLength(50)] string Name,
+	string? PhoneNumber,
+	[EmailAddress][StringLength(50)] string Email,
+	[StringLength(50)] string Password
 );
 
 public record UpdateUserDto(
@@ -23,4 +31,11 @@ public record UpdateUserDto(
 	string? Bio,
 	string? PhoneNumber,
 	[EmailAddress][StringLength(50)] string Email
+// [StringLength(50)] string Password
+);
+
+public record LoginUserDto(
+	[EmailAddress][StringLength(50)] string Email,
+	string Password,
+	bool RememberMe
 );
