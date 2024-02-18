@@ -19,20 +19,20 @@ public class AdvertisementsControllerTests
 {
 	private readonly IMapper mapper;
 
-	private readonly Mock<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>> serviceStub = new();
+	private readonly Mock<IBaseService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>> serviceStub = new();
 
-	private static Advertisement CreateRandomAdvertisement(string? title = null)
+	private static Advertisement CreateRandomAdvertisement(string? title = null) => new()
 	{
-		return new()
-		{
-			Id = new Random().Next(1, 1000),
-			Title = title ?? Guid.NewGuid().ToString(),
-			Description = Guid.NewGuid().ToString(),
-			CreatedDate = DateTimeOffset.UtcNow,
-			UserId = new Random().Next(1, 1000),
-			CategoryId = new Random().Next(1, 1000)
-		};
-	}
+		Id = CreateRandomInt(),
+		Title = title ?? Guid.NewGuid().ToString(),
+		Description = Guid.NewGuid().ToString(),
+		Price = CreateRandomInt(),
+		ConditionId = CreateRandomInt(),
+		UserId = Guid.NewGuid().ToString(),
+		CategoryId = CreateRandomInt()
+	};
+
+	private static int CreateRandomInt() => new Random().Next(1, 1000);
 
 	public AdvertisementsControllerTests()
 	{
@@ -141,7 +141,7 @@ public class AdvertisementsControllerTests
 		// Arrange
 		var createdAdvertisement = CreateRandomAdvertisement();
 		var createdAdvertisementDto = mapper.Map<AdvertisementDto>(createdAdvertisement);
-		
+
 		serviceStub.Setup(service => service.CreateAsync(It.IsAny<CreateAdvertisementDto>()))
 							.ReturnsAsync((createdAdvertisementDto, createdAdvertisement.Id));
 

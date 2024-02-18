@@ -15,7 +15,7 @@ namespace SellnBuy.UnitTests.ControllerTests;
 public class ConditionsControllerTests
 {
     private readonly IMapper mapper;
-    private readonly Mock<IService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>> serviceStub = new();
+    private readonly Mock<IBaseService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>> serviceStub = new();
 
     private static Condition CreateRandomCondition(string? name = null)
     {

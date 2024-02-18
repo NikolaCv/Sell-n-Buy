@@ -19,7 +19,7 @@ namespace SellnBuy.UnitTests.ServiceTests;
 public class AdvertisementsServiceTests
 {
 	private readonly IMapper mapper;
-	private readonly Mock<IRepository<Advertisement>> repositoryStub = new();
+	private readonly Mock<IBaseRepository<Advertisement>> repositoryStub = new();
 
 	private static Advertisement CreateRandomAdvertisement(string? title = null) => new()
 	{
@@ -28,10 +28,9 @@ public class AdvertisementsServiceTests
 		Description = Guid.NewGuid().ToString(),
 		Price = CreateRandomInt(),
 		ConditionId = CreateRandomInt(),
-		UserId = CreateRandomInt(),
+		UserId = Guid.NewGuid().ToString(),
 		CategoryId = CreateRandomInt()
 	};
-
 
 	private static int CreateRandomInt() => new Random().Next(1, 1000);
 

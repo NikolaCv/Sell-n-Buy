@@ -15,7 +15,7 @@ namespace SellnBuy.UnitTests.ControllerTests;
 public class CategoriesControllerTests
 {
     private readonly IMapper mapper;
-    private readonly Mock<IService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>> serviceStub = new();
+    private readonly Mock<IBaseService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>> serviceStub = new();
 
     private static Category CreateRandomCategory(string? name = null)
     {

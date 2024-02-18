@@ -14,7 +14,7 @@ namespace SellnBuy.UnitTests.ServiceTests;
 public class CategoriesServiceTests
 {
     private readonly IMapper mapper;
-    private readonly Mock<IRepository<Category>> repositoryStub = new();
+    private readonly Mock<IBaseRepository<Category>> repositoryStub = new();
 
     private static Category CreateRandomCategory(string? name = null) => new()
     {
