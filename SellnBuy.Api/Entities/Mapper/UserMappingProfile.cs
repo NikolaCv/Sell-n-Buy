@@ -6,5 +6,7 @@ public class UserMappingProfile : BaseMappingProfile<User, UserDto, CreateUserDt
 {
     public UserMappingProfile()
     {
+        CreateMap<RegisterUserDto, User>();
+        CreateMap<LoginUserDto, User>();
     }
 }
