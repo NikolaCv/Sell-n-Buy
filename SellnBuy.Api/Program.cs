@@ -13,10 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using SellnBuy.Api.Entities.DTOs;
 using SellnBuy.Api.Entities.Mapper;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers(options =>
 				{
@@ -41,19 +45,35 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 builder.Services.AddAutoMapper(typeof(AdvertisementMappingProfile));
+builder.Services.AddAutoMapper(typeof(ConditionMappingProfile));
+builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
 
 var connectionString = builder.Configuration.GetConnectionString("SellnBuyContext");
 builder.Services.AddSqlServer<SellnBuyContext>(connectionString);
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+	// Configure identity options here
+	options.User.RequireUniqueEmail = true;
 
-builder.Services.AddScoped<IRepository<User>, EntityFrameworkUsersRepository>();
-builder.Services.AddScoped<IRepository<Advertisement>, EntityFrameworkAdvertisementsRepository>();
-builder.Services.AddScoped<IRepository<Condition>, EntityFrameworkConditionsRepository>();
-builder.Services.AddScoped<IRepository<Category>, EntityFrameworkCategoriesRepository>();
+	options.Password.RequiredLength = 8;
+	options.Password.RequireDigit = true;
+	options.Password.RequireLowercase = true;
+	options.Password.RequireUppercase = true;
+	options.Password.RequireNonAlphanumeric = true;
+})
+.AddEntityFrameworkStores<SellnBuyContext>()
+.AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IService<User, UserDto, CreateUserDto, UpdateUserDto>, UsersService>();
-builder.Services.AddScoped<IService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>, AdvertisementsService>();
-builder.Services.AddScoped<IService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>, ConditionsService>();
-builder.Services.AddScoped<IService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>, CategoriesService>();
+builder.Services.AddScoped<IUsersRepository, EntityFrameworkUsersRepository>();
+builder.Services.AddScoped<IBaseRepository<Advertisement>, EntityFrameworkAdvertisementsRepository>();
+builder.Services.AddScoped<IBaseRepository<Condition>, EntityFrameworkConditionsRepository>();
+builder.Services.AddScoped<IBaseRepository<Category>, EntityFrameworkCategoriesRepository>();
+
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IBaseService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>, AdvertisementsService>();
+builder.Services.AddScoped<IBaseService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>, ConditionsService>();
+builder.Services.AddScoped<IBaseService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>, CategoriesService>();
 
 var app = builder.Build();
 
