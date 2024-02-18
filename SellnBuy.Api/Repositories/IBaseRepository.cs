@@ -1,8 +1,6 @@
-using SellnBuy.Api.Entities;
-
 namespace SellnBuy.Api.Repositories;
 
-public interface IRepository<T> where T : BaseEntity
+public interface IBaseRepository<T>
 {
     Task<IEnumerable<T>> GetAllAsync();
     Task<T?> GetAsync(int id);

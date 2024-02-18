@@ -7,7 +7,7 @@ namespace SellnBuy.Api.Services;
 
 public class ConditionsService : BaseService<Condition, ConditionDto, CreateConditionDto, UpdateConditionDto>
 {
-	public ConditionsService(IRepository<Condition> repository, IMapper mapper) : base(repository, mapper)
+	public ConditionsService(IBaseRepository<Condition> repository, IMapper mapper) : base(repository, mapper)
 	{
 	}
 

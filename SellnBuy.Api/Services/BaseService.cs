@@ -5,14 +5,14 @@ using SellnBuy.Api.Repositories;
 
 namespace SellnBuy.Api.Services;
 
-public abstract class BaseService<T, TDto, CreateTDto, UpdateTDto> : IService<T, TDto, CreateTDto, UpdateTDto>
+public abstract class BaseService<T, TDto, CreateTDto, UpdateTDto> : IBaseService<T, TDto, CreateTDto, UpdateTDto>
 where T : BaseEntity
 {
 	protected readonly IMapper mapper;
 
-	protected readonly IRepository<T> repository;
+	protected readonly IBaseRepository<T> repository;
 
-	public BaseService(IRepository<T> repository, IMapper mapper)
+	public BaseService(IBaseRepository<T> repository, IMapper mapper)
 	{
 		this.mapper = mapper;
 		this.repository = repository;

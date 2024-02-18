@@ -1,13 +1,14 @@
 using AutoMapper;
 using SellnBuy.Api.Entities;
 using SellnBuy.Api.Entities.DTOs;
+using SellnBuy.Api.Exceptions;
 using SellnBuy.Api.Repositories;
 
 namespace SellnBuy.Api.Services;
 
 public class AdvertisementsService : BaseService<Advertisement, AdvertisementDto, CreateAdvertisementDto, UpdateAdvertisementDto>
 {
-	public AdvertisementsService(IRepository<Advertisement> repository, IMapper mapper) : base(repository, mapper)
+	public AdvertisementsService(IBaseRepository<Advertisement> repository, IMapper mapper) : base(repository, mapper)
 	{
 	}
 
@@ -18,6 +19,6 @@ public class AdvertisementsService : BaseService<Advertisement, AdvertisementDto
 		if (!string.IsNullOrWhiteSpace(title))
 			advertisements = advertisements.Where(item => item.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
 
-		return advertisements.Select(mapper.Map<AdvertisementDto>);
+		return advertisements.Select(mapper.Map<Advertisement, AdvertisementDto>);
 	}
 }

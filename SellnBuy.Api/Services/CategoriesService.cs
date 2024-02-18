@@ -7,7 +7,7 @@ namespace SellnBuy.Api.Services;
 
 public class CategoriesService : BaseService<Category, CategoryDto, CreateCategoryDto, UpdateCategoryDto>
 {
-    public CategoriesService(IRepository<Category> repository, IMapper mapper) : base(repository, mapper)
+    public CategoriesService(IBaseRepository<Category> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 
